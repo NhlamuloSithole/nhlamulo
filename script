@@ -1,0 +1,33 @@
+#!/bin/bash
+dir="labs"
+link = "html"
+page = "index.html"
+echo "------------------------"
+echo "NGINX SCRIPT"
+echo "-----------------------"
+echo "script starting!..."
+sleep 1
+
+if(systemctl is-active nginx)
+then
+    echo "service running" 
+    sleep 1
+    echo "creating directory $dir"
+    mkdir /var/www/html/$dir
+    echo "changing ownership of $dir to $USER"
+    sleep 1
+    chown $USER:root /var/www/html/labs
+    echo "creating symbolic link $link"
+    sleep 1
+    ln -s /var/www/html/$dir $link
+    echo "creating test page $page"
+    sleep 1
+    echo "adding content to $page"
+    sleep 1
+    cat .../html/$page 
+
+else
+    echo "nginx not  running"
+    echo "ëxiting"
+    exit 1
+fi
